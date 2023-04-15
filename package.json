@@ -2,9 +2,10 @@
   "name": "cli",
   "version": "1.0.0",
   "description": "An interactive CLI tool built with NodeJs to generate now.sh configurations",
-  "main": "app.js",
+  "main": "src/app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node src/app.js",
+    "lint": "eslint src"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,11 @@
   "bugs": {
     "url": "https://github.com/Olayanju-1234/CLI/issues"
   },
-  "homepage": "https://github.com/Olayanju-1234/CLI#readme"
+  "homepage": "https://github.com/Olayanju-1234/CLI#readme",
+  "dependencies": {
+    "inquirer": "^8.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.38.0"
+  }
 }
