@@ -1,12 +1,12 @@
 {
-  "name": "cli",
+  "name": "joe-cli",
   "version": "1.0.0",
   "description": "An interactive CLI tool built with NodeJs to generate now.sh configurations",
   "main": "src/app.js",
+  "bin": "src/app.js",
   "scripts": {
     "start": "node src/app.js",
-    "lint": "eslint src",
-    "now-build": "npm run build"
+    "lint": "eslint src/"
   },
   "repository": {
     "type": "git",

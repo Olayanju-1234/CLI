@@ -1,3 +1,5 @@
+#! /usr/bin/env node
+
 const fs = require('fs');
 const path = require('path');
 const inquirer = require('inquirer');
@@ -6,7 +8,8 @@ const nodeExpressConfig = require('../configs/nodeExpress');
 const staticConfig = require('../configs/static');
 const frontend = require('../configs/frontendCon');
 
-const existingConfig =  fs.existsSync('now.json')
+const nowPath = path.join(process.cwd(), 'now.json');
+const existingConfig =  fs.existsSync(nowPath) ? require(nowPath) : {};
 
 async function createConfig() {
 
@@ -18,7 +21,7 @@ async function createConfig() {
         {
             type: 'text',
             name: 'name',
-            message: 'What is the name of your project?',
+            message: 'What is the name of your project? (default: current directory name)',
             default: path.basename(process.cwd())
         },
         {
@@ -48,7 +51,33 @@ async function createConfig() {
             default:
                 break;
         }
-        console.log(config);
+        
+        const moreAnswers = await inquirer.prompt([
+            {
+                type: 'confirm',
+                name: 'specifyAlias',
+                message: 'Would you like to specify an alias?',
+                default: true
+            },
+            {
+                type: 'text',
+                name: 'alias',
+                message: 'What is the alias you want to use? (e.g. my-project.now.sh. You can specify multiple aliases)',
+                default: answers.name,
+                when: a => a.specifyAlias,
+            },
+        ]
+        )
+        config.alias = moreAnswers.alias ? moreAnswers.alias.split(',').map(a => a.trim()) : []; 
+
+        fs.writeFileSync(nowPath, JSON.stringify(config, null, 2), 'utf8');
+
+        console.log('now.json created! 🎉 To deploy, run `now`');
+
+        process.exit(0);
+
+
+
 }
 
 
