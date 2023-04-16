@@ -15,7 +15,7 @@ async function nodeExpressConfig(config) {
     let mainFile = 'src/app.js';
     
     try {
-        const packageJSON = require('../package.json')
+        const packageJSON = require(process.cwd() + '/package.json')
         mainFile = packageJSON.main;
     } catch (error) {
     }
