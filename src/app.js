@@ -4,8 +4,7 @@ const inquirer = require('inquirer');
 
 const nodeExpressConfig = require('../configs/nodeExpress');
 const staticConfig = require('../configs/static');
-const reactConfig = require('../configs/reactConfig');
-
+const frontend = require('../configs/frontendCon');
 
 const existingConfig =  fs.existsSync('now.json')
 
@@ -26,7 +25,7 @@ async function createConfig() {
             type: 'list',
             name: 'type',
             message: 'What type of project is this?',
-            choices: ['node-express', 'static', 'react', 'static-build', 'lambda'],
+            choices: ['node-express', 'static', 'react', 'vue', 'static-build'],
         },
     ])
         config.name = answers.name;
@@ -38,7 +37,13 @@ async function createConfig() {
                 config = await staticConfig(config);
                 break;
             case 'react':
-                config = await reactConfig(config);
+                config = await frontend(config, 'build');
+                break;
+            case 'vue':
+                config = await frontend(config);
+                break;
+            case 'static-build':
+                config = await frontend(config);
                 break;
             default:
                 break;
