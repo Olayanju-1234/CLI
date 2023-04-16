@@ -1,5 +1,5 @@
 {
-  "name": "joe-cli",
+  "name": "olayanju-joe-cli",
   "version": "1.0.0",
   "description": "An interactive CLI tool built with NodeJs to generate now.sh configurations",
   "main": "src/app.js",
@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/Olayanju-1234/CLI#readme",
   "dependencies": {
-    "inquirer": "^8.0.0"
+    "inquirer": "^6.4.1"
   },
   "devDependencies": {
     "eslint": "^8.38.0"
