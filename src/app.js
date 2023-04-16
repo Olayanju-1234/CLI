@@ -4,9 +4,9 @@ const fs = require('fs');
 const path = require('path');
 const inquirer = require('inquirer');
 
-const nodeExpressConfig = require('../configs/nodeExpress');
-const staticConfig = require('../configs/static');
-const frontend = require('../configs/frontendCon');
+const nodeExpressConfig = require('./configs/nodeExpress');
+const staticConfig = require('./configs/static');
+const frontend = require('./configs/frontendCon');
 
 const nowPath = path.join(process.cwd(), 'now.json');
 const existingConfig =  fs.existsSync(nowPath) ? require(nowPath) : {};
