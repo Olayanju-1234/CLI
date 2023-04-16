@@ -1,3 +1,4 @@
+const path = require('path');
 const inquirer = require('inquirer');
 
 const baseConfig = {
@@ -15,7 +16,7 @@ async function nodeExpressConfig(config) {
     let mainFile = 'src/app.js';
     
     try {
-        const packageJSON = require(process.cwd() + '/package.json')
+        const packageJSON = require(path.join(process.cwd(), 'package.json'))
         mainFile = packageJSON.main;
     } catch (error) {
     }
@@ -28,13 +29,14 @@ async function nodeExpressConfig(config) {
             default: mainFile,
         }
     ]);
-    console.log(answers);
+
+    baseConfig.builds[0].src = answers.main;
+    baseConfig.routes[0].dest = answers.main;
+
     return {
-        ...baseConfig,
-        ...config
+        ...config,
+        ...baseConfig
     }
 }
 
-module.exports = {
-    nodeExpressConfig
-}
+module.exports = nodeExpressConfig
